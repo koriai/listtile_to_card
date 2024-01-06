@@ -4,7 +4,7 @@
 
 ![materialCard](https://lh3.googleusercontent.com/RKy5lXvuZCUtOPcYktilkdiatXT0-Ry46KRgldMA_WVBSCJhQBGIoUznlMZfeuzvVaOtHSl1BxDkY2YAc2_oI9dx_40SFDdwkg3GeuRyrC4=s0)
 
-![materialCard_mp4](https://github.com/koriai/listtile_to_card/blob/master/cards-swapping_3P_1.mp4)
+![materialCard_mp4](https://github.com/koriai/listtile_to_card/blob/master/listtile_card.gif)
 
 According to official [Material 3: Card](https://m3.material.io/components/cards/guidelines#f6a5cb7b-b301-425a-a04f-229acc3bb22a), listtile and card are good to show list items.
 
