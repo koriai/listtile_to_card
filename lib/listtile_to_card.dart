@@ -1,4 +1,5 @@
 /// Provide conversion from [ListTile] to [Card]
+library;
 // ignore_for_file: lines_longer_than_80_chars, prefer_expression_function_bodies
 
 import 'package:flutter/material.dart';

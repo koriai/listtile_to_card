@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({required this.title, super.key});
 
   final String title;
 
@@ -56,91 +56,120 @@ class _MyHomePageState extends State<MyHomePage> {
     log(Theme.of(context).cardTheme.color.toString());
     log(Theme.of(context).cardColor.toString());
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 60,
-              width: 50,
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            title: Text(widget.title),
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 60,
+                  width: 50,
+                ),
+                ListTileToCard(
+                  cardElevation: 6,
+                  cardShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  cardMargin: const EdgeInsets.fromLTRB(6, 0, 6, 6),
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  flexes: (
+                    titleFlex: 1,
+                    leadingFlex: 6,
+                    subtitleFlex: 1,
+                    trailingFlex: 0,
+                  ),
+                  boxFit: BoxFit.cover,
+                  flexFit: FlexFit.tight,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  listTile: ListTile(
+                    leading: Image.asset(
+                      'assets/pexels-efrem-efre-19749458.jpg',
+                      fit: BoxFit.cover,
+                    ),
+                    trailing: const Icon(Icons.exit_to_app_outlined),
+                    title: const Text('street'),
+                    subtitle:
+                        Text('Width: ${size.width}, Heigth: ${size.height}'),
+                    onTap: _incrementCounter,
+                  ),
+                ),
+                ListTileToCard(
+                  axisDirection: AxisDirection.right,
+                  cardMargin: const EdgeInsets.all(6),
+                  cardElevation: 6,
+                  cardShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  flexes: (
+                    titleFlex: 1,
+                    leadingFlex: 0,
+                    subtitleFlex: 3,
+                    trailingFlex: 1,
+                  ),
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  listTile: ListTile(
+                    leading: Image.asset(
+                      'assets/pexels-marina-zvada-19562918.jpg',
+                    ),
+                    trailing: const Icon(Icons.exit_to_app_outlined),
+                    title: const Text('mountain'),
+                    subtitle:
+                        Text('Width: ${size.width}, Heigth: ${size.height}'),
+                    onTap: _incrementCounter,
+                  ),
+                ),
+                ListTileToCard(
+                  breakWidth: 800,
+                  axisDirection: AxisDirection.left,
+                  cardMargin: const EdgeInsets.all(6),
+                  cardElevation: 6,
+                  cardShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  listTile: ListTile(
+                    leading: Image.asset(
+                      'assets/pexels-ikbal-alahmad-11182271.jpg',
+                    ),
+                    trailing: const Icon(Icons.exit_to_app_outlined),
+                    title: const Text('tree'),
+                    subtitle:
+                        Text('Width: ${size.width}, Heigth: ${size.height}'),
+                    onTap: _incrementCounter,
+                  ),
+                ),
+                ListTileToCard(
+                  breakWidth: 1000,
+                  axisDirection: AxisDirection.up,
+                  cardMargin: const EdgeInsets.all(6),
+                  cardElevation: 6,
+                  cardShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  listTile: ListTile(
+                    leading: Image.asset(
+                      'assets/pexels-mooodish-18515836.jpg',
+                    ),
+                    trailing: const Icon(Icons.exit_to_app_outlined),
+                    title: const Text('bird'),
+                    subtitle:
+                        Text('Width: ${size.width}, Heigth: ${size.height}'),
+                    onTap: _incrementCounter,
+                  ),
+                ),
+              ],
             ),
-            ListTileToCard(
-              breakWidth: 400,
-              axisDirection: AxisDirection.left,
-              cardMargin: const EdgeInsets.all(66),
-              cardElevation: 6,
-              cardShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              listTile: ListTile(
-                leading: const Icon(Icons.start),
-                trailing: const Icon(Icons.exit_to_app_outlined),
-                title: Text('Width: ${size.width}, Heigth: ${size.height}'),
-                onTap: _incrementCounter,
-              ),
-            ),
-            ListTileToCard(
-              breakWidth: 600,
-              axisDirection: AxisDirection.left,
-              cardMargin: const EdgeInsets.all(66),
-              cardElevation: 6,
-              cardShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              listTile: ListTile(
-                leading: const Icon(Icons.start),
-                trailing: const Icon(Icons.exit_to_app_outlined),
-                title: Text('Width: ${size.width}, Heigth: ${size.height}'),
-                onTap: _incrementCounter,
-              ),
-            ),
-            ListTileToCard(
-              breakWidth: 800,
-              axisDirection: AxisDirection.left,
-              cardMargin: const EdgeInsets.all(66),
-              cardElevation: 6,
-              cardShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              listTile: ListTile(
-                leading: const Icon(Icons.start),
-                trailing: const Icon(Icons.exit_to_app_outlined),
-                title: Text('Width: ${size.width}, Heigth: ${size.height}'),
-                onTap: _incrementCounter,
-              ),
-            ),
-            ListTileToCard(
-              breakWidth: 1000,
-              axisDirection: AxisDirection.left,
-              cardMargin: const EdgeInsets.all(66),
-              cardElevation: 6,
-              cardShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              listTile: ListTile(
-                leading: const Icon(Icons.start),
-                trailing: const Icon(Icons.exit_to_app_outlined),
-                title: Text('Width: ${size.width}, Heigth: ${size.height}'),
-                onTap: _incrementCounter,
-              ),
-            ),
-          ],
-        ),
-      );
-    });
+          ),
+        );
+      },
+    );
   }
 }

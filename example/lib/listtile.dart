@@ -1,6 +1,8 @@
 /// Provide conversion from [ListTile] to [Card]
-// ignore_for_file: lines_longer_than_80_chars, prefer_expression_function_bodies
+library;
 
+// ignore_for_file: lines_longer_than_80_chars, prefer_expression_function_bodies
+/// Provide conversion from [ListTile] to [Card]
 import 'package:flutter/material.dart';
 
 ///
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 class ListTileToCard extends StatelessWidget {
   const ListTileToCard({
     required this.listTile,
+    this.cardSize = const Size(200, 200),
     this.customCard,
     this.breakHeight,
     this.breakWidth = 600,
@@ -17,15 +20,40 @@ class ListTileToCard extends StatelessWidget {
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.color,
     this.splashColor,
+    this.cardShadowColor,
+    this.cardSurfaceTintColor,
     this.cardElevation,
     this.cardShape,
     this.borderOnForeground = true,
     this.cardMargin,
-    this.clipBehavior,
+    this.clipBehavior = Clip.hardEdge,
     this.child,
     this.semanticContainer = true,
+    this.boxFit,
+    this.flexFit = FlexFit.loose,
+    this.flexes = (
+      titleFlex: 1,
+      subtitleFlex: 1,
+      leadingFlex: 1,
+      trailingFlex: 1
+    ),
     super.key,
   });
+
+  final Size cardSize;
+
+  final BoxFit? boxFit;
+  final FlexFit flexFit;
+
+  /// Records for widget flexes
+  ///
+  /// if (Flex == 0), do not show in Card
+  final ({
+    int titleFlex,
+    int subtitleFlex,
+    int leadingFlex,
+    int trailingFlex,
+  }) flexes;
 
   /// The card's background color.
   ///
@@ -54,6 +82,8 @@ class ListTileToCard extends StatelessWidget {
   /// The appearance of the splash can be configured with the theme's splash
   /// factory, [ThemeData.splashFactory].
   final Color? splashColor;
+  final Color? cardShadowColor;
+  final Color? cardSurfaceTintColor;
 
   /// The z-coordinate at which to place this card. This controls the size of
   /// the shadow below the card.
@@ -141,50 +171,114 @@ class ListTileToCard extends StatelessWidget {
     switch (axisDirection) {
       case AxisDirection.down:
         return Column(
-          mainAxisSize: MainAxisSize.min,
+          // mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: mainAxisAlignment,
           crossAxisAlignment: crossAxisAlignment,
           children: <Widget>[
-            if (listTile.leading != null) listTile.leading!,
-            if (listTile.title != null) listTile.title!,
-            if (listTile.subtitle != null) listTile.subtitle!,
-            if (listTile.trailing != null) listTile.trailing!,
+            if (listTile.leading != null && flexes.leadingFlex > 0)
+              Flexible(flex: flexes.leadingFlex, child: listTile.leading!),
+            if (listTile.title != null && flexes.titleFlex > 0)
+              Flexible(flex: flexes.titleFlex, child: listTile.title!),
+            if (listTile.subtitle != null && flexes.subtitleFlex > 0)
+              Flexible(flex: flexes.subtitleFlex, child: listTile.subtitle!),
+            if (listTile.trailing != null && flexes.trailingFlex > 0)
+              Flexible(flex: flexes.trailingFlex, child: listTile.trailing!),
           ],
         );
       case AxisDirection.up:
         return Column(
-          mainAxisSize: MainAxisSize.min,
+          // mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: mainAxisAlignment,
           crossAxisAlignment: crossAxisAlignment,
           children: <Widget>[
-            if (listTile.trailing != null) listTile.trailing!,
-            if (listTile.subtitle != null) listTile.subtitle!,
-            if (listTile.title != null) listTile.title!,
-            if (listTile.leading != null) listTile.leading!,
+            if (listTile.trailing != null && flexes.trailingFlex > 0)
+              Flexible(
+                flex: flexes.trailingFlex,
+                fit: flexFit,
+                child: listTile.trailing!,
+              ),
+            if (listTile.subtitle != null && flexes.subtitleFlex > 0)
+              Flexible(
+                flex: flexes.subtitleFlex,
+                fit: flexFit,
+                child: listTile.subtitle!,
+              ),
+            if (listTile.title != null && flexes.titleFlex > 0)
+              Flexible(
+                flex: flexes.titleFlex,
+                fit: flexFit,
+                child: listTile.title!,
+              ),
+            if (listTile.leading != null && flexes.leadingFlex > 0)
+              Flexible(
+                flex: flexes.leadingFlex,
+                fit: flexFit,
+                child: listTile.leading!,
+              ),
           ],
         );
       case AxisDirection.right:
         return Row(
-          mainAxisSize: MainAxisSize.min,
+          // mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: mainAxisAlignment,
           crossAxisAlignment: crossAxisAlignment,
           children: <Widget>[
-            if (listTile.leading != null) listTile.leading!,
-            if (listTile.title != null) listTile.title!,
-            if (listTile.subtitle != null) listTile.subtitle!,
-            if (listTile.trailing != null) listTile.trailing!,
+            if (listTile.leading != null && flexes.leadingFlex > 0)
+              Flexible(
+                flex: flexes.leadingFlex,
+                fit: flexFit,
+                child: listTile.leading!,
+              ),
+            if (listTile.title != null && flexes.titleFlex > 0)
+              Flexible(
+                flex: flexes.titleFlex,
+                fit: flexFit,
+                child: listTile.title!,
+              ),
+            if (listTile.subtitle != null && flexes.subtitleFlex > 0)
+              Flexible(
+                flex: flexes.subtitleFlex,
+                fit: flexFit,
+                child: listTile.subtitle!,
+              ),
+            if (listTile.trailing != null && flexes.trailingFlex > 0)
+              Flexible(
+                flex: flexes.trailingFlex,
+                fit: flexFit,
+                child: listTile.trailing!,
+              ),
           ],
         );
       case AxisDirection.left:
         return Row(
-          mainAxisSize: MainAxisSize.min,
+          // mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: mainAxisAlignment,
           crossAxisAlignment: crossAxisAlignment,
           children: <Widget>[
-            if (listTile.trailing != null) listTile.trailing!,
-            if (listTile.subtitle != null) listTile.subtitle!,
-            if (listTile.title != null) listTile.title!,
-            if (listTile.leading != null) listTile.leading!,
+            if (listTile.trailing != null && flexes.trailingFlex > 0)
+              Flexible(
+                flex: flexes.trailingFlex,
+                fit: flexFit,
+                child: listTile.trailing!,
+              ),
+            if (listTile.subtitle != null && flexes.subtitleFlex > 0)
+              Flexible(
+                flex: flexes.subtitleFlex,
+                fit: flexFit,
+                child: listTile.subtitle!,
+              ),
+            if (listTile.title != null && flexes.titleFlex > 0)
+              Flexible(
+                flex: flexes.titleFlex,
+                fit: flexFit,
+                child: listTile.title!,
+              ),
+            if (listTile.leading != null && flexes.leadingFlex > 0)
+              Flexible(
+                flex: flexes.leadingFlex,
+                fit: flexFit,
+                child: listTile.leading!,
+              ),
           ],
         );
     }
@@ -198,15 +292,26 @@ class ListTileToCard extends StatelessWidget {
         type: MaterialType.card,
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
+            final cardTheme = Theme.of(context).cardTheme;
             final size = MediaQuery.of(context).size;
             if (size.width > breakWidth) {
-              return customCard ??
-                  Card(
-                    color: listTile.tileColor,
-                    elevation: cardElevation,
-                    shape: cardShape,
+              return Semantics(
+                container: semanticContainer,
+                child: Container(
+                  width: cardSize.width,
+                  height: cardSize.height,
+                  margin: cardMargin ?? cardTheme.margin,
+                  child: Material(
+                    type: MaterialType.card,
+                    color: color ?? cardTheme.color,
+                    shadowColor: cardShadowColor ?? cardTheme.shadowColor,
+                    surfaceTintColor:
+                        cardSurfaceTintColor ?? cardTheme.surfaceTintColor,
+                    elevation: cardElevation ?? cardTheme.elevation ?? 1,
+                    shape: cardShape ?? cardTheme.shape,
                     borderOnForeground: borderOnForeground,
-                    clipBehavior: Clip.hardEdge,
+                    clipBehavior:
+                        clipBehavior ?? cardTheme.clipBehavior ?? Clip.none,
                     child: InkWell(
                       splashColor: listTile.splashColor,
                       focusColor: listTile.focusColor,
@@ -223,7 +328,9 @@ class ListTileToCard extends StatelessWidget {
                         child: _cardContentBuilder(listTile, axisDirection),
                       ),
                     ),
-                  );
+                  ),
+                ),
+              );
             } else {
               return listTile;
             }
