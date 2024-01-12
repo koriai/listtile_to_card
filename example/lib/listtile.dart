@@ -5,14 +5,17 @@ library;
 /// Provide conversion from [ListTile] to [Card]
 import 'package:flutter/material.dart';
 
+/// [ListTileToCard] is a widget that convert [ListTile] into [Card]
+
+/// if the [Size] of [ListTile] is larger than [breakWidth], or [breakHeight]
+/// convert into [Card]
 ///
-/// [ListTile.width] is larger than breakWidth,
 ///
 class ListTileToCard extends StatelessWidget {
   const ListTileToCard({
     required this.listTile,
     this.cardSize = const Size(200, 200),
-    this.customCard,
+    this.customWidget,
     this.breakHeight,
     this.breakWidth = 600,
     this.axisDirection = AxisDirection.down,
@@ -40,9 +43,13 @@ class ListTileToCard extends StatelessWidget {
     super.key,
   });
 
+  /// The size of the card.
   final Size cardSize;
 
+  /// BoxFit
   final BoxFit? boxFit;
+
+  /// FlexFit
   final FlexFit flexFit;
 
   /// Records for widget flexes
@@ -82,7 +89,11 @@ class ListTileToCard extends StatelessWidget {
   /// The appearance of the splash can be configured with the theme's splash
   /// factory, [ThemeData.splashFactory].
   final Color? splashColor;
+
+  /// The surface tint
   final Color? cardShadowColor;
+
+  /// The surface tint
   final Color? cardSurfaceTintColor;
 
   /// The z-coordinate at which to place this card. This controls the size of
@@ -145,8 +156,8 @@ class ListTileToCard extends StatelessWidget {
   /// Input [ListTile] to convert.
   final ListTile listTile;
 
-  /// if [customCard] is null, return default card
-  final Card? customCard;
+  /// If you want custom widget, set this.
+  final Widget? customWidget;
 
   /// if listTile.width > breakpoint,
   /// convert into Card
@@ -164,7 +175,10 @@ class ListTileToCard extends StatelessWidget {
   /// default value is to make [Column]
   final AxisDirection axisDirection;
 
+  /// MainAxisAlignment of Column, Row
   final MainAxisAlignment mainAxisAlignment;
+
+  /// CrossAxisAlignment of Column, Row
   final CrossAxisAlignment crossAxisAlignment;
 
   Widget _cardContentBuilder(ListTile listTile, AxisDirection axisDirection) {
@@ -292,47 +306,52 @@ class ListTileToCard extends StatelessWidget {
         type: MaterialType.card,
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
+            ///
             final cardTheme = Theme.of(context).cardTheme;
+
+            ///
             final size = MediaQuery.of(context).size;
-            if (size.width > breakWidth) {
+
+            if (size.width < breakWidth) {
+              return listTile;
+            } else {
               return Semantics(
                 container: semanticContainer,
-                child: Container(
-                  width: cardSize.width,
-                  height: cardSize.height,
-                  margin: cardMargin ?? cardTheme.margin,
-                  child: Material(
-                    type: MaterialType.card,
-                    color: color ?? cardTheme.color,
-                    shadowColor: cardShadowColor ?? cardTheme.shadowColor,
-                    surfaceTintColor:
-                        cardSurfaceTintColor ?? cardTheme.surfaceTintColor,
-                    elevation: cardElevation ?? cardTheme.elevation ?? 1,
-                    shape: cardShape ?? cardTheme.shape,
-                    borderOnForeground: borderOnForeground,
-                    clipBehavior:
-                        clipBehavior ?? cardTheme.clipBehavior ?? Clip.none,
-                    child: InkWell(
-                      splashColor: listTile.splashColor,
-                      focusColor: listTile.focusColor,
-                      hoverColor: listTile.hoverColor,
-                      enableFeedback: listTile.enableFeedback,
-                      onFocusChange: listTile.onFocusChange,
-                      onTap: listTile.onTap,
-                      onLongPress: listTile.onLongPress,
-                      autofocus: listTile.autofocus,
-                      child: Padding(
-                        padding: cardMargin ??
-                            listTile.contentPadding ??
-                            EdgeInsets.zero,
-                        child: _cardContentBuilder(listTile, axisDirection),
+                child: customWidget ??
+                    Container(
+                      width: cardSize.width,
+                      height: cardSize.height,
+                      margin: cardMargin ?? cardTheme.margin,
+                      child: Material(
+                        type: MaterialType.card,
+                        color: color ?? cardTheme.color,
+                        shadowColor: cardShadowColor ?? cardTheme.shadowColor,
+                        surfaceTintColor:
+                            cardSurfaceTintColor ?? cardTheme.surfaceTintColor,
+                        elevation: cardElevation ?? cardTheme.elevation ?? 1,
+                        shape: cardShape ?? cardTheme.shape,
+                        borderOnForeground: borderOnForeground,
+                        clipBehavior:
+                            clipBehavior ?? cardTheme.clipBehavior ?? Clip.none,
+                        child: InkWell(
+                          splashColor: listTile.splashColor,
+                          focusColor: listTile.focusColor,
+                          hoverColor: listTile.hoverColor,
+                          enableFeedback: listTile.enableFeedback,
+                          onFocusChange: listTile.onFocusChange,
+                          onTap: listTile.onTap,
+                          onLongPress: listTile.onLongPress,
+                          autofocus: listTile.autofocus,
+                          child: Padding(
+                            padding: cardMargin ??
+                                listTile.contentPadding ??
+                                EdgeInsets.zero,
+                            child: _cardContentBuilder(listTile, axisDirection),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
               );
-            } else {
-              return listTile;
             }
           },
         ),

@@ -35,26 +35,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  ///
   int _counter = 0;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
+  ///
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
+    log(_counter.toString());
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    log('Width: ${size.width}');
-    log('Heigth: ${size.height}');
-    log(Theme.of(context).cardTheme.color.toString());
-    log(Theme.of(context).cardColor.toString());
+    // log('Width: ${size.width}');
+    // log('Heigth: ${size.height}');
+    // log(Theme.of(context).cardTheme.color.toString());
+    // log(Theme.of(context).cardColor.toString());
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Scaffold(
@@ -84,7 +82,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   boxFit: BoxFit.cover,
                   flexFit: FlexFit.tight,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   listTile: ListTile(
                     leading: Image.asset(
                       'assets/pexels-efrem-efre-19749458.jpg',
@@ -121,6 +118,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     subtitle:
                         Text('Width: ${size.width}, Heigth: ${size.height}'),
                     onTap: _incrementCounter,
+                  ),
+                  customWidget: Card(
+                    child: Container(
+                      height: 160,
+                      width: 160,
+                      color: Colors.blue[200],
+                      child: const Center(
+                        child: Text('custom'),
+                      ),
+                    ),
                   ),
                 ),
                 ListTileToCard(
