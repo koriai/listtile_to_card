@@ -1,6 +1,6 @@
 name: listtile_to_card
-description: "ListTile to Card, vice versa."
-version: 0.0.2
+description: "ListTile to Card"
+version: 0.0.3
 homepage: https://www.koriai.com
 repository: https://github.com/koriai/listtile_to_card
 
@@ -29,7 +29,7 @@ platforms:
   windows:
 
 screenshots:
-  - description: "Gif screenshots"
+  - description: "gif"
     path: images/listtile_card.gif
 
 
