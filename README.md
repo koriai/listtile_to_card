@@ -2,7 +2,7 @@
 
 ## Features
 
-![screenshot1](https://github.com/koriai/listtile_to_card/blob/main/images/listtile_card.gif)
+![https://github.com/koriai/listtile_to_card/blob/main/images/listtile_card.gif](https://github.com/koriai/listtile_to_card/blob/master/images/listtile_card.gif)
 
 ![materialCard](https://lh3.googleusercontent.com/RKy5lXvuZCUtOPcYktilkdiatXT0-Ry46KRgldMA_WVBSCJhQBGIoUznlMZfeuzvVaOtHSl1BxDkY2YAc2_oI9dx_40SFDdwkg3GeuRyrC4=s0)
 
