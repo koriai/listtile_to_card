@@ -1,3 +1,7 @@
+## 0.0.4
+
+* resize screenshot
+
 ## 0.0.3
 
 * update assets
